@@ -35,6 +35,45 @@ For this project, I had to use these minikube specifications <br><br>
 - minikube container  image up and running.
 <img width="2906" height="862" alt="image" src="https://github.com/user-attachments/assets/cdd467eb-9825-42c2-99d1-c67e35114f8a" />
 
+### Install Dapr into Minikube Cluster
+`dapr init -k`<br>
+
+This command installs the Dapr control plane (dapr-sidecar-injector, dapr-operator, dapr-placement, dapr-sentry) into the dapr-system namespace within the minikube cluster.<br>
+
+###### Verify the installation by running:
+
+`kubectl get pods -n dapr-system` or `dapr status -k` <br>
+
+<img width="966" height="311" alt="image" src="https://github.com/user-attachments/assets/992bb40a-8a34-4eb4-a89c-53235eea8eb1" />
+
+### Install Kafka using Helm
+I utilize the Bitnami Kafka chart because it is well-maintained and includes ZooKeeper.<br><br>
+
+- Add the Bitnami Helm repository:<br>
+`
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+`<br>
+- Install Kafka into a dedicated namespace:<br>
+
+`
+kubectl create namespace kafka
+helm install kafka bitnami/kafka -n kafka \
+  --set replicas=1 \
+  --set zookeeper.replicaCount=1
+`<br>
+The --set flags override defaults to create a lighter, single-node setup suitable for Minikube.
+
+- Verify the Kafka installation:<br>
+`
+kubectl get pods -n kafka -w
+`<br>
+###### N:B: Wait for the 'kafka-0' and 'zookeeper-0' pods to show STATUS 'Running'
+
+
+
+
+
 
 
 
