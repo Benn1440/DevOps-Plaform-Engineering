@@ -29,9 +29,12 @@ This is a textual diagram to visualize the flow.<br><br>
 - `helm` to install complex applications and the `dapr` CLI to manage Dapr, and `minikube` for Kubernetes. <br><br>
 
 For this project, I had to use these minikube specifications <br><br>
-`benedictokafor@fyng-sys-bokafor ~ % minikube start --cpus=2 --memory=2200mb --disk-size=20g` <br><br>
+`benedictokafor@fyng-sys-bokafor ~ % minikube start --cpus=2 --memory=2200mb --disk-size=20g` <br>
 
-<img width="923" height="329" alt="image" src="https://github.com/user-attachments/assets/447d237a-5425-4dbf-8eb8-0368364b77e6" />
+<img width="923" height="329" alt="image" src="https://github.com/user-attachments/assets/447d237a-5425-4dbf-8eb8-0368364b77e6" /> <br>
+- minikube container  image up and running.
+<img width="2906" height="862" alt="image" src="https://github.com/user-attachments/assets/cdd467eb-9825-42c2-99d1-c67e35114f8a" />
+
 
 
 
