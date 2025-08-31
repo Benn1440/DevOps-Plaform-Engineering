@@ -14,6 +14,6 @@ This is a comprehensive and advanced DevOps/Platform Engineering task that touch
 
 - Kafka: The message broker for the async Pub/Sub pattern facilitated by Dapr.
 
-- YugabyteDB: A PostgreSQL-compatible distributed SQL database. Our microservices will use it for persistence.
+- YugabyteDB: A PostgreSQL-compatible distributed SQL database. The microservices will use it for persistence.
 
-- Two Sample Microservices: Simple services (e.g., order-service and user-service) to demonstrate the patterns.
+- Two Sample Microservices: Simple services order-service and user-service.
