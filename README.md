@@ -16,4 +16,4 @@ This is a comprehensive and advanced DevOps/Platform Engineering task that touch
 
 - YugabyteDB: A PostgreSQL-compatible distributed SQL database. The microservices will use it for persistence.
 
-- Two Sample Microservices: Simple services order-service and user-service.
+- Two Sample Microservices: Simple services (e.g., order-service and user-service) to demonstrate the patterns.
