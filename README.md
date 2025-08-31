@@ -24,3 +24,16 @@ This is a textual diagram to visualize the flow.<br><br>
 
 <img width="1550" height="1062" alt="image" src="https://github.com/user-attachments/assets/8375b15a-75a1-4b0c-812d-c3b70fe19b7c" />
 
+# Install Essential Tools in Your Shell
+
+- `helm` to install complex applications and the `dapr` CLI to manage Dapr, and `minikube` for Kubernetes. <br><br>
+
+For this project, I had to use these minikube specifications <br><br>
+`benedictokafor@fyng-sys-bokafor ~ % minikube start --cpus=2 --memory=2200mb --disk-size=20g` <br><br>
+
+<img width="923" height="329" alt="image" src="https://github.com/user-attachments/assets/447d237a-5425-4dbf-8eb8-0368364b77e6" />
+
+
+
+
+
