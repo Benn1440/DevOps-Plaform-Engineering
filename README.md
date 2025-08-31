@@ -10,10 +10,17 @@ This is a comprehensive and advanced DevOps/Platform Engineering task that touch
 
 - Open Policy Agent (OPA) + OPA Gatekeeper: Used to enforce policies on the Kubernetes cluster itself. I'd create a policy to block direct Service-1 to Service-2 communication via NetworkPolicy.
 
-- KEDA: Event-driven autoscaler for Kubernetes. Use it to scale a service based on Kafka queue length.
+- KEDA: Event-driven autoscaler for Kubernetes. You can use it to scale a service based on the length of the Kafka queue.
 
 - Kafka: The message broker for the async Pub/Sub pattern facilitated by Dapr.
 
 - YugabyteDB: A PostgreSQL-compatible distributed SQL database. The microservices will use it for persistence.
 
-- Two Sample Microservices: Simple services (e.g., order-service and user-service) to demonstrate the patterns.
+- Two Sample Microservices: Simple services order-service and user-service to demonstrate the patterns.
+
+# High-Level Architecture
+
+This is a textual diagram to visualize the flow.<br><br>
+
+<img width="1550" height="1062" alt="image" src="https://github.com/user-attachments/assets/8375b15a-75a1-4b0c-812d-c3b70fe19b7c" />
+
