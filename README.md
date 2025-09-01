@@ -54,22 +54,51 @@ I utilize the Bitnami Kafka chart because it is well-maintained and includes Zoo
 helm repo add bitnami https://charts.bitnami.com/bitnami
 `<br>
 `helm repo update`
-<br>
-- Install Kafka into a dedicated namespace:<br>
+<br><br>
+<img width="736" height="111" alt="image" src="https://github.com/user-attachments/assets/5627ee52-c86e-476a-a2af-2e4b2daf9ad1" />
 
+- Install Kafka into a dedicated namespace:<br>
 `
 kubectl create namespace kafka 
 `<br>
 `helm install kafka bitnami/kafka -n kafka \
   --set replicas=1 \
   --set zookeeper.replicaCount=1`<br>
-The --set flags override defaults to create a lighter, single-node setup suitable for Minikube.
+The --set flags override defaults to create a lighter, single-node setup suitable for Minikube.<br><br>
+<img width="1118" height="268" alt="image" src="https://github.com/user-attachments/assets/6d349872-a2e1-46cf-8bb7-7fbc9b7ed837" /><br>
 
 - Verify the Kafka installation:<br>
 `
 kubectl get pods -n kafka -w
 `<br>
 ###### N:B: Wait for the 'kafka-0' and 'zookeeper-0' pods to show STATUS 'Running'
+<img width="724" height="243" alt="image" src="https://github.com/user-attachments/assets/3be08967-ba30-4a82-8352-245a7c65297b" /><br><br>
+
+## Next Step is to Install YugabyteDB using Helm
+Add the YugabyteDB Helm repository:
+`helm repo add yugabytedb https://charts.yugabyte.com`<br>
+
+`helm repo update`<br>
+- Install YugabyteDB into a dedicated namespace:<br>
+
+`kubectl create namespace yugabyte`<br><br>
+`helm install yb-demo yugabytedb/yugabyte -n yugabyte \
+  --set replicas.master=1 \
+  --set replicas.tserver=1 \
+  --set resource.master.requests.memory=1Gi \
+  --set resource.master.requests.cpu=0.5 \
+  --set resource.tserver.requests.memory=1Gi \
+  --set resource.tserver.requests.cpu=0.5`<br><br>
+
+<img width="946" height="379" alt="image" src="https://github.com/user-attachments/assets/920c48b3-676d-40a3-8ef0-11c83d53b0ad" />
+
+This configuration is for a minimal local deployment.
+
+- Verify the YugabyteDB installation:<br>
+
+`kubectl get pods -n yugabyte -w`<br>
+###### N:B: Wait for the master and tserver pods to be in Running state. as it can take a few minutes.
+
 
 
 
