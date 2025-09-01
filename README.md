@@ -121,6 +121,20 @@ This configures the APISIX gateway to be accessible on http://<minikube-ip>:3000
 <img width="1065" height="412" alt="image" src="https://github.com/user-attachments/assets/39124713-b0b9-452a-808d-9c70f6bc0a8d" /><br><br>
 <img width="789" height="311" alt="image" src="https://github.com/user-attachments/assets/b7828d7d-bf55-4bbe-82b5-aa234a210e4a" /><br><br>
 
+## Next Step is to Install OPA Gatekeeper
+OPA Gatekeeper is the admission controller we'll use to enforce our network policy.
+
+- Install Gatekeeper:<br>
+
+`kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/master/deploy/gatekeeper.yaml`<br><br>
+###### This installs it into the gatekeeper-system namespace.
+
+- Verify the OPA Gatekeeper installation:<br>
+
+`kubectl get pods -n gatekeeper-system` <br><br>
+<img width="1378" height="753" alt="image" src="https://github.com/user-attachments/assets/4ed70f73-e162-4449-8af0-7bc0c7bdc718" /> <br><br>
+<img width="794" height="106" alt="image" src="https://github.com/user-attachments/assets/4d9921bc-5fad-4bf8-b26a-1fcdc419b1d7" /> <br><br>
+
 
 
 
