@@ -52,16 +52,17 @@ I utilize the Bitnami Kafka chart because it is well-maintained and includes Zoo
 - Add the Bitnami Helm repository:<br>
 `
 helm repo add bitnami https://charts.bitnami.com/bitnami
-helm repo update
 `<br>
+`helm repo update`
+<br>
 - Install Kafka into a dedicated namespace:<br>
 
 `
-kubectl create namespace kafka
-helm install kafka bitnami/kafka -n kafka \
-  --set replicas=1 \
-  --set zookeeper.replicaCount=1
+kubectl create namespace kafka 
 `<br>
+`helm install kafka bitnami/kafka -n kafka \
+  --set replicas=1 \
+  --set zookeeper.replicaCount=1`<br>
 The --set flags override defaults to create a lighter, single-node setup suitable for Minikube.
 
 - Verify the Kafka installation:<br>
