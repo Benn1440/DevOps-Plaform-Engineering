@@ -117,7 +117,11 @@ This configuration is for a minimal local deployment.
 This configures the APISIX gateway to be accessible on http://<minikube-ip>:30000.
 
 - Verify APISIX installation:<br><br>
-`kubectl get pods -n apisix`
+`kubectl get pods -n apisix`<br><br>
+<img width="1065" height="412" alt="image" src="https://github.com/user-attachments/assets/39124713-b0b9-452a-808d-9c70f6bc0a8d" /><br><br>
+<img width="789" height="311" alt="image" src="https://github.com/user-attachments/assets/b7828d7d-bf55-4bbe-82b5-aa234a210e4a" /><br><br>
+
+
 
 
 
