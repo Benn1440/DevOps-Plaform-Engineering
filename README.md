@@ -60,7 +60,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 - Install Kafka into a dedicated namespace:<br>
 `
 kubectl create namespace kafka 
-`<br>
+`<br><br>
 `helm install kafka bitnami/kafka -n kafka \
   --set replicas=1 \
   --set zookeeper.replicaCount=1`<br>
@@ -97,10 +97,27 @@ This configuration is for a minimal local deployment.
 - Verify the YugabyteDB installation:<br>
 
 `kubectl get pods -n yugabyte -w`<br>
-###### N:B: Wait for the master and tserver pods to be in Running state. as it can take a few minutes.
+###### N:B: Wait for the master and tserver pods to be in Running state. as it can take a few minutes.<br><br>
+<img width="557" height="141" alt="image" src="https://github.com/user-attachments/assets/44dbf146-6aeb-4147-bf3e-1e736b103836" /><br><br>
 
+## Next Step is to Install Apache APISIX using Helm
 
+- Add the APISIX Helm repository:
 
+`helm repo add apisix https://charts.apiseven.com`<br>
+`helm repo update`<br>
+
+- Install APISIX into a dedicated namespace:
+
+`kubectl create namespace apisix`<br><br>
+`helm install apisix apisix/apisix -n apisix \
+  --set gateway.type=NodePort \
+  --set gateway.http.nodePort=30000 \
+  --set admin.allow.ipList="{0.0.0.0/0}"`<br><br>
+This configures the APISIX gateway to be accessible on http://<minikube-ip>:30000.
+
+- Verify APISIX installation:<br><br>
+`kubectl get pods -n apisix`
 
 
 
