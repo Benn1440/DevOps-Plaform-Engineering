@@ -135,6 +135,8 @@ OPA Gatekeeper is the admission controller we'll use to enforce our network poli
 <img width="1378" height="753" alt="image" src="https://github.com/user-attachments/assets/4ed70f73-e162-4449-8af0-7bc0c7bdc718" /> <br><br>
 <img width="794" height="106" alt="image" src="https://github.com/user-attachments/assets/4d9921bc-5fad-4bf8-b26a-1fcdc419b1d7" /> <br><br>
 
+## Components Breakdown<br><br>
+
 ### Dapr Components Configuration<br>
 There is a need to create Dapr Component manifests so Dapr knows how to talk to Kafka and YugabyteDB.
 
@@ -148,7 +150,54 @@ Create the new dapr-components in a namespace.<br>
 
 `kubectl create namespace dapr-components`<br><br>
 
+### OPA Gatekeeper Policy
+There is a need to create a policy to block direct network communication. The logic will be:
 
+Target: Any pod with the label app=service-1
+
+Restriction: Cannot initiate connections to any pod with the label app=service-2
+
+Mechanism: A Kubernetes NetworkPolicy that will be generated and enforced by OPA Gatekeeper.
+
+Create a ConstraintTemplate (which defines the type of policy we can create) and a Constraint (which is the actual instance of that policy, defining the parameters like the labels to look for).<br><br>
+
+### Sample Microservices Code & Configuration
+Create two simple Python services.
+
+## Service 1: order-service
+
+Framework: Flask
+
+Endpoints:
+
+POST /orders: Creates a new order, stores it in YugabyteDB via Dapr state, and then tries to call Service 2 directly using Dapr service invocation (to demonstrate the OPA block).
+
+Publishes an order_created event to a Kafka topic via Dapr pub/sub.
+
+Dockerfile: To containerize the application.
+
+## Service 2: user-service
+
+Framework: Flask
+
+Endpoints:
+
+GET /users/<user_id>: Returns user info (a simple stub). This is the endpoint Service 1 tries to call.
+
+POST /orders (Dapr Subscribe endpoint): This endpoint is triggered automatically when a message arrives on the order_created Kafka topic. This demonstrates async pub/sub.
+
+Dockerfile: To containerize the application.
+
+Kubernetes Manifests for both services:
+
+Deployment: Specifies the Docker image, ports, and most importantly, the Dapr annotations that automatically inject the Dapr sidecar.
+
+Service: Creates a stable network endpoint for the pod(s).
+
+### APISIX Route Configuration
+Create an ApisixRoute resource that tells the APISIX gateway to forward any request for /order-service/* to the Dapr sidecar of the order-service. Dapr will then handle the request and route it to the actual Flask application inside the pod.
+
+The flow will be: Client -> APISIX (port 30000) -> order-service-dapr-sidecar -> order-service-app-container
 
 
 
