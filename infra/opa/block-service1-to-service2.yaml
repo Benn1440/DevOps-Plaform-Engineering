@@ -1,0 +1,31 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredNetworkPolicy
+metadata:
+  name: block-service1-to-service2
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaceSelector:
+      matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values: ["kube-system", "gatekeeper-system", "dapr-system"]
+  parameters:
+    allowedLabels: ["app"]
+    networkPolicySpec:
+      podSelector:
+        matchLabels:
+          app: "service-2"
+      policyTypes:
+      - Ingress
+      ingress:
+      - from:
+        - podSelector:
+            matchLabels:
+              app: "service-1"
+        ports:
+        - protocol: TCP
+          port: 5000 # Flask apps run on port 5000
+      egress: [] # This is an ingress-only policy
