@@ -135,6 +135,20 @@ OPA Gatekeeper is the admission controller we'll use to enforce our network poli
 <img width="1378" height="753" alt="image" src="https://github.com/user-attachments/assets/4ed70f73-e162-4449-8af0-7bc0c7bdc718" /> <br><br>
 <img width="794" height="106" alt="image" src="https://github.com/user-attachments/assets/4d9921bc-5fad-4bf8-b26a-1fcdc419b1d7" /> <br><br>
 
+### Dapr Components Configuration<br>
+There is a need to create Dapr Component manifests so Dapr knows how to talk to Kafka and YugabyteDB.
+
+- Dapr PubSub Component for Kafka (pubsub-kafka.yaml)<br>
+This tells Dapr to use our Kafka cluster as a pub/sub message bus.
+
+-  Dapr State Store Component for YugabyteDB (state-yugabyte.yaml)<br>
+This tells Dapr to use YugabyteDB as a state store. Since YugabyteDB is PostgreSQL-compatible, we use the Dapr PostgreSQL state component.
+
+Create the new dapr-components in a namespace.<br>
+
+`kubectl create namespace dapr-components`<br><br>
+
+
 
 
 
