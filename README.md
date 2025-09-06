@@ -200,6 +200,13 @@ Create an ApisixRoute resource that tells the APISIX gateway to forward any requ
 The flow will be: Client -> APISIX (port 30000) -> order-service-dapr-sidecar -> order-service-app-container
 
 
+## Next, we build and push Docker Images to any registry your cluster can access 
+### Build the images
+`docker build -t order-service:latest src/order-service/`<br><br>
+`docker build -t user-service:latest src/user-service/`<br><br>
+
+### Verify images are built
+`docker images | grep -E "(order-service|user-service)"`
 
 
 
